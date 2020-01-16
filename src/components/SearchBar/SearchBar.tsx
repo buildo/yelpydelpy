@@ -4,9 +4,10 @@ import { StatefulButton } from 'buildo-react-components/lib/Button';
 import * as React from 'react';
 import { queryRestaurants } from './../../queries/queries';
 import './searchBar.scss';
+import { YelpSearchResponse } from 'src/model/yelpResponse';
 
 type Props = {
-  onSearchResponse: (res: object) => void;
+  onSearchResponse: (res: YelpSearchResponse) => void;
 };
 
 type State = {
@@ -20,7 +21,7 @@ export default class SearchBar extends React.Component<Props, State> {
   private onSearch = () =>
     new Promise((resolve, reject) => {
       queryRestaurants(this.state.location, this.state.range.value)
-        .then(res => {
+        .then((res: YelpSearchResponse) => {
           resolve();
           this.props.onSearchResponse(res);
         })

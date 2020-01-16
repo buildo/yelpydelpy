@@ -9,7 +9,6 @@ import { getCurrentView } from 'avenger/lib/browser';
 import * as API from '../API';
 import { locationToView } from '../model';
 
-import mock from './../mock/yelpResponse.json'; // TODO: remove
 import { YelpSearchResponse } from 'src/model/yelpResponse';
 
 export const currentView = getCurrentView(locationToView);
@@ -25,9 +24,5 @@ export const randomName = queryStrict(
 );
 
 export function queryRestaurants(location: string, radius: number): Promise<YelpSearchResponse> {
-  console.log('location: ', location, 'radius:', radius);
-  return new Promise((resolve, _reject) => {
-    // TODO: actually call the API
-    setTimeout(() => resolve(<YelpSearchResponse>mock), 500);
-  });
+  return API.searchRestaurants(location, radius);
 }

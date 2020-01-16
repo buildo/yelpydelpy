@@ -24,8 +24,8 @@ class App extends React.Component<typeof queries.Props> {
   render() {
     return (
       <View column className="app">
-        <h1>Bento App</h1>
-        <SearchBar />
+        <h1>yelpydelpy</h1>
+        <SearchBar onSearchResponse={() => console.log('api responded')} />
       </View>
     );
   }

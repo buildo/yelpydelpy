@@ -11,9 +11,9 @@ export const getRandomName = (length: number): TaskEither<unknown, string> => {
   ).map(res => `${res.name} ${res.surname}`);
 };
 
-export function searchRestaurants(location: string, range: number): Promise<YelpSearchResponse> {
+export function searchRestaurants(_location: string, _range: number): Promise<YelpSearchResponse> {
   // TODO: remove mock
-  return new Promise<YelpSearchResponse>((resolve, reject) => {
+  return new Promise<YelpSearchResponse>((resolve, _reject) => {
     setTimeout(() => resolve(<YelpSearchResponse>mock), 1000);
   });
 

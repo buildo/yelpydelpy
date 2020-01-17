@@ -24,6 +24,7 @@ const queries = declareQueries({ currentView });
 class App extends React.Component<typeof queries.Props> {
   onApiResponse = (res: YelpSearchResponse) => {
     res.businesses.map((business: Business) => {
+      // TODO: actually do something with API response
       console.log(`${business.name}, ${Math.trunc(business.distance)}m`);
     });
     console.log(res);

@@ -1,10 +1,10 @@
-import Input from '../Base/Input/Input';
-import Dropdown from '../Base/Dropdown/Dropdown';
-import Button from '../Base/Button/Button';
+import Input from '../../Basic/Input/Input';
+import Dropdown from '../../Basic/Dropdown/Dropdown';
+import Button from '../../Basic/Button/Button';
 import * as React from 'react';
-import View from '../Base/View';
+import View from '../../Basic/View';
 import './searchBar.scss';
-import { SearchParams } from './../../model/searchParams';
+import { SearchParams } from '../../../model/searchParams';
 
 type Props = {
   onSearch: (query: SearchParams) => void;

@@ -11,8 +11,8 @@ In this simple example it does a bit of both.
 */
 
 import * as React from 'react';
-import View from '../Base/View';
-import SearchBar from '../SearchBar/SearchBar';
+import View from '../Basic/View';
+import SearchBar from '../Shared/SearchBar/SearchBar';
 import { declareQueries } from 'avenger/lib/react';
 import { currentView } from '../../queries';
 import { SearchParams } from 'src/model/searchParams';

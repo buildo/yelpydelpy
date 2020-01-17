@@ -15,8 +15,6 @@ import View from '../View';
 import SearchBar from '../SearchBar/SearchBar';
 import { declareQueries } from 'avenger/lib/react';
 import { currentView } from '../../queries';
-
-import './app.scss';
 import { YelpSearchResponse, Business } from 'src/model/yelpResponse';
 
 const queries = declareQueries({ currentView });
@@ -32,9 +30,11 @@ class App extends React.Component<typeof queries.Props> {
 
   render() {
     return (
-      <View column className="app">
+      <View column height="100%" hAlignContent="center" vAlignContent="center" className="app">
         <h1>yelpydelpy</h1>
-        <SearchBar onSearchResponse={this.onApiResponse} />
+        <View width="50%">
+          <SearchBar onSearchResponse={this.onApiResponse} />
+        </View>
       </View>
     );
   }

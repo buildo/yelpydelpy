@@ -5,6 +5,7 @@ import * as React from 'react';
 import { queryRestaurants } from './../../queries/queries';
 import './searchBar.scss';
 import { YelpSearchResponse } from 'src/model/yelpResponse';
+import View from '../View';
 
 type Props = {
   onSearchResponse: (res: YelpSearchResponse) => void;
@@ -41,7 +42,7 @@ export default class SearchBar extends React.Component<Props, State> {
 
   render() {
     return (
-      <div className="search-bar">
+      <View grow className="search-bar">
         <Input
           className="location-field"
           placeholder="Insert location"
@@ -61,7 +62,7 @@ export default class SearchBar extends React.Component<Props, State> {
           label="search"
           onClick={this.onSearch}
         />
-      </div>
+      </View>
     );
   }
 }

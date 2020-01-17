@@ -1,43 +1,27 @@
 import Input from '../Base/Input/Input';
 import Dropdown from '../Base/Dropdown/Dropdown';
-import StatefulButton from '../Base/StatefulButton/StatefulButton';
+import Button from '../Base/Button/Button';
 import * as React from 'react';
-import { queryRestaurants } from './../../queries/queries';
-import { YelpSearchResponse } from 'src/model/yelpResponse';
 import View from '../Base/View';
 import './searchBar.scss';
+import { SearchParams } from './../../model/searchParams';
 
 type Props = {
-  onSearchResponse: (res: YelpSearchResponse) => void;
+  onSearch: (query: SearchParams) => void;
+  currentSearchParams: SearchParams;
 };
 
-type State = {
-  location: string;
-  range: RangeOption;
-};
+type State = SearchParams;
 
 export default class SearchBar extends React.Component<Props, State> {
   private onTypeLocation = (text: string) => this.setState({ location: text });
-  private onChangeRange = (selectedRange: RangeOption) => this.setState({ range: selectedRange });
-  private onSearch = () =>
-    new Promise((resolve, reject) => {
-      queryRestaurants(this.state.location, this.state.range.value)
-        .then((res: YelpSearchResponse) => {
-          resolve();
-          this.props.onSearchResponse(res);
-        })
-        .catch(() => {
-          console.log('ERROR'); // TODO:
-          reject();
-        });
-    });
+  private onChangeRange = (selectedRange: RangeOption) =>
+    this.setState({ range: selectedRange.value });
+  private onSearch = () => this.props.onSearch(this.state);
 
   constructor(props: Props) {
     super(props);
-    this.state = {
-      location: '',
-      range: rangeOptions[1]
-    };
+    this.state = props.currentSearchParams;
   }
 
   render() {
@@ -45,7 +29,7 @@ export default class SearchBar extends React.Component<Props, State> {
       <View grow className="search-bar">
         <View grow style={{ minWidth: '300px' }}>
           <Input
-            wrapper={{ style: { width: '100%' } }} //wtf?
+            wrapper={{ style: { width: '100%' } }}
             className="location-field"
             placeholder="Insert location"
             value={this.state.location}
@@ -59,10 +43,8 @@ export default class SearchBar extends React.Component<Props, State> {
           }}
         >
           <Dropdown
-            // wrapper={{ style: { width: '100px' } }} // wtf? this doesnt work
-            // style={{ width: '100px' }} // wtf? this doesnt work
             className="range-field"
-            value={this.state.range}
+            value={rangeOptions.find((option: RangeOption) => option.value === this.state.range)}
             onChange={this.onChangeRange}
             options={rangeOptions}
           />
@@ -73,10 +55,9 @@ export default class SearchBar extends React.Component<Props, State> {
             marginLeft: '10px'
           }}
         >
-          <StatefulButton
-            style={{ width: '100px' }} // wtf?
+          <Button
+            style={{ width: '100px' }}
             className="search-button"
-            baseState="ready"
             label="search"
             onClick={this.onSearch}
           />

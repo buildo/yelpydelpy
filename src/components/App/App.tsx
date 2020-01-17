@@ -15,28 +15,44 @@ import View from '../Base/View';
 import SearchBar from '../SearchBar/SearchBar';
 import { declareQueries } from 'avenger/lib/react';
 import { currentView } from '../../queries';
-import { YelpSearchResponse, Business } from 'src/model/yelpResponse';
+import { SearchParams } from 'src/model/searchParams';
+import { CurrentView } from 'src/model';
+import { doUpdateCurrentView } from '../../commands';
+
+function currentSearchParams(currentView: CurrentView): SearchParams {
+  switch (currentView.view) {
+    case 'search':
+      return { location: currentView.location, range: currentView.range };
+    case 'home':
+      return { location: '', range: 1000 };
+  }
+}
 
 const queries = declareQueries({ currentView });
 
 class App extends React.Component<typeof queries.Props> {
-  onApiResponse = (res: YelpSearchResponse) => {
-    res.businesses.map((business: Business) => {
-      // TODO: actually do something with API response
-      console.log(`${business.name}, ${Math.trunc(business.distance)}m`);
-    });
-    console.log(res);
+  // when the user makes a research, update the URL with query params
+  search = (res: SearchParams) => {
+    doUpdateCurrentView({ view: 'search', ...res }).run();
   };
 
-  // TODO: remove red borders
   render() {
-    return (
-      <View column height="100%" hAlignContent="center" vAlignContent="center" className="app">
-        <h1>yelpydelpy</h1>
-        <View shrink={false} style={{ minWidth: '50%' }}>
-          <SearchBar onSearchResponse={this.onApiResponse} />
-        </View>
-      </View>
+    return this.props.queries.fold(
+      () => null,
+      () => null,
+      ({ currentView }) => {
+        return (
+          <View column height="100%" hAlignContent="center" vAlignContent="center" className="app">
+            <h1>yelpydelpy</h1>
+            <View shrink={false} style={{ minWidth: '50%' }}>
+              <SearchBar
+                onSearch={this.search}
+                currentSearchParams={currentSearchParams(currentView)}
+              />
+            </View>
+          </View>
+        );
+      }
     );
   }
 }

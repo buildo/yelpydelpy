@@ -1,11 +1,11 @@
-import Input from 'buildo-react-components/lib/Input';
-import SingleDropdown from 'buildo-react-components/lib/Dropdown';
-import { StatefulButton } from 'buildo-react-components/lib/Button';
+import Input from '../Base/Input/Input';
+import Dropdown from '../Base/Dropdown/Dropdown';
+import StatefulButton from '../Base/StatefulButton/StatefulButton';
 import * as React from 'react';
 import { queryRestaurants } from './../../queries/queries';
-import './searchBar.scss';
 import { YelpSearchResponse } from 'src/model/yelpResponse';
-import View from '../View';
+import View from '../Base/View';
+import './searchBar.scss';
 
 type Props = {
   onSearchResponse: (res: YelpSearchResponse) => void;
@@ -43,25 +43,44 @@ export default class SearchBar extends React.Component<Props, State> {
   render() {
     return (
       <View grow className="search-bar">
-        <Input
-          className="location-field"
-          placeholder="Insert location"
-          value={this.state.location}
-          onChange={this.onTypeLocation}
-        />
-        <SingleDropdown
-          className="range-field"
-          value={this.state.range}
-          onChange={this.onChangeRange}
-          placeholder="- km"
-          options={rangeOptions}
-        />
-        <StatefulButton
-          className="search-button"
-          baseState="ready"
-          label="search"
-          onClick={this.onSearch}
-        />
+        <View grow style={{ minWidth: '300px' }}>
+          <Input
+            wrapper={{ style: { width: '100%' } }} //wtf?
+            className="location-field"
+            placeholder="Insert location"
+            value={this.state.location}
+            onChange={this.onTypeLocation}
+          />
+        </View>
+        <View
+          shrink={false}
+          style={{
+            marginLeft: '10px'
+          }}
+        >
+          <Dropdown
+            // wrapper={{ style: { width: '100px' } }} // wtf? this doesnt work
+            // style={{ width: '100px' }} // wtf? this doesnt work
+            className="range-field"
+            value={this.state.range}
+            onChange={this.onChangeRange}
+            options={rangeOptions}
+          />
+        </View>
+        <View
+          shrink={false}
+          style={{
+            marginLeft: '10px'
+          }}
+        >
+          <StatefulButton
+            style={{ width: '100px' }} // wtf?
+            className="search-button"
+            baseState="ready"
+            label="search"
+            onClick={this.onSearch}
+          />
+        </View>
       </View>
     );
   }

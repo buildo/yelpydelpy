@@ -11,7 +11,7 @@ In this simple example it does a bit of both.
 */
 
 import * as React from 'react';
-import View from '../View';
+import View from '../Base/View';
 import SearchBar from '../SearchBar/SearchBar';
 import { declareQueries } from 'avenger/lib/react';
 import { currentView } from '../../queries';
@@ -28,11 +28,12 @@ class App extends React.Component<typeof queries.Props> {
     console.log(res);
   };
 
+  // TODO: remove red borders
   render() {
     return (
       <View column height="100%" hAlignContent="center" vAlignContent="center" className="app">
         <h1>yelpydelpy</h1>
-        <View width="50%">
+        <View shrink={false} style={{ minWidth: '50%' }}>
           <SearchBar onSearchResponse={this.onApiResponse} />
         </View>
       </View>

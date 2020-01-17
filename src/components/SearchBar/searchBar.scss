@@ -1,5 +1,6 @@
 $bar-height: 50px;
 $border: 2px solid lightgrey;
+$roundness: $bar-height / 4;
 $range-button-w: 100px;
 
 .search-bar {
@@ -11,7 +12,7 @@ $range-button-w: 100px;
     min-width: 300px;
     flex-grow: 1;
     border: $border;
-    border-radius: $bar-height/2 0px 0px $bar-height/2;
+    border-radius: $roundness 0px 0px $roundness;
 
     input {
       height: 100%;
@@ -30,7 +31,7 @@ $range-button-w: 100px;
     min-width: $range-button-w;
     border: $border;
     border-left: none;
-    border-radius: 0px $bar-height/2 $bar-height/2 0px;
+    border-radius: 0px $roundness $roundness 0px;
 
     .dropdown__control {
       height: 100%;
@@ -49,7 +50,7 @@ $range-button-w: 100px;
     height: $bar-height;
     width: 100px;
     border: $border;
-    border-radius: $bar-height/2;
+    border-radius: $roundness;
     margin-left: 10px;
   }
 }

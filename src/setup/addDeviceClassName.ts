@@ -1,6 +1,6 @@
 // This script adds "is-desktop", "is-phone" or "is-tablet" class to the root document element
 
-import * as cx from 'classnames';
+import cx from 'classnames';
 import mobileDetect from '../util/mobileDetect';
 
 const md = mobileDetect();

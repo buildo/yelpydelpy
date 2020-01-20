@@ -1,0 +1,33 @@
+$left-space: 8px;
+
+.restaurant-preview {
+  border: 1px solid red;
+
+  .category-tag {
+    color: white;
+    background-color: grey;
+    border-radius: 3px;
+  }
+
+  .info-frame {
+    h1 {
+      font-size: 25px;
+      font-weight: bold;
+      margin: 5px $left-space;
+    }
+
+    h2 {
+      font-size: 15px;
+      font-weight: lighter;
+      margin: 0px $left-space;
+    }
+
+    .rating {
+      img {
+        height: 15px;
+        width: 15px;
+        margin-right: 3px;
+      }
+    }
+  }
+}

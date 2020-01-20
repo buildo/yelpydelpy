@@ -19,6 +19,11 @@ import { SearchParams } from 'src/model/searchParams';
 import { CurrentView } from 'src/model';
 import { doUpdateCurrentView } from '../../commands';
 
+// TODO: remove mock
+import mockResponse from './../../mock/yelpResponse.json';
+import { YelpSearchResponse } from 'src/model/yelpResponse';
+import RestaurantPreview from '../Shared/RestaurantPreview/RestaurantPreview';
+
 function currentSearchParams(currentView: CurrentView): SearchParams {
   switch (currentView.view) {
     case 'search':
@@ -31,6 +36,9 @@ function currentSearchParams(currentView: CurrentView): SearchParams {
 const queries = declareQueries({ currentView });
 
 class App extends React.Component<typeof queries.Props> {
+  // TODO: remove mock
+  private restaurantsList = (mockResponse as YelpSearchResponse).businesses;
+
   // when the user makes a research, update the URL with query params
   search = (res: SearchParams) => {
     doUpdateCurrentView({ view: 'search', ...res }).run();
@@ -44,11 +52,18 @@ class App extends React.Component<typeof queries.Props> {
         return (
           <View column height="100%" hAlignContent="center" vAlignContent="center" className="app">
             <h1>yelpydelpy</h1>
-            <View shrink={false} style={{ minWidth: '50%' }}>
+            <View column shrink={false} style={{ minWidth: '50%' }}>
               <SearchBar
-                onSearch={this.search}
                 currentSearchParams={currentSearchParams(currentView)}
+                onSearch={this.search}
               />
+              {this.restaurantsList.map(restaurant => {
+                return (
+                  <View style={{ margin: '10px 0px' }}>
+                    <RestaurantPreview restaurant={restaurant} />
+                  </View>
+                );
+              })}
             </View>
           </View>
         );

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Business } from 'src/model/YelpSearchResponse';
-import View from './../../Basic/View'; // CLARIFY: why absolute path doesn't work?
+import View from '../../Basic/View';
 
 import './restaurantPreview.scss';
 
@@ -29,14 +29,6 @@ export default class RestaurantPreview extends React.Component<Props, {}> {
           <View className="header" style={{ height: '38px' }}>
             <View className="name" style={{ height: '100%' }} grow>
               <h1>{rest.name}</h1>
-            </View>
-            <View className="signal" style={{ height: '100%' }}>
-              <h1
-                style={{ height: '20px', margin: '8px 10px' }}
-                className={rest.is_closed ? 'closed' : 'open'}
-              >
-                {rest.is_closed ? 'CLOSED' : 'OPEN'}
-              </h1>
             </View>
           </View>
 

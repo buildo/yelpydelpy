@@ -56,7 +56,7 @@ class App extends React.Component<typeof queries.Props> {
             column
             style={{ height: '100%', overflow: 'auto' }}
             hAlignContent="center"
-            // vAlignContent="center" TODO: apply only on homepage
+            vAlignContent={currentView.view === 'search' ? 'top' : 'center'}
             className="app"
           >
             <View shrink={false}>
@@ -70,15 +70,17 @@ class App extends React.Component<typeof queries.Props> {
               />
             </View>
 
-            <View column shrink={false} style={{ minWidth: '50%' }}>
-              {this.restaurantsList.map(restaurant => {
-                return (
-                  <View style={{ minHeight: '120px', margin: '10px 0px' }}>
-                    <RestaurantPreview restaurant={restaurant} />
-                  </View>
-                );
-              })}
-            </View>
+            {currentView.view === 'search' && (
+              <View column shrink={false} style={{ minWidth: '50%' }}>
+                {this.restaurantsList.map(restaurant => {
+                  return (
+                    <View style={{ minHeight: '120px', margin: '10px 0px' }}>
+                      <RestaurantPreview restaurant={restaurant} />
+                    </View>
+                  );
+                })}
+              </View>
+            )}
           </View>
         );
       }

@@ -26,7 +26,7 @@ export default class RestaurantPreview extends React.Component<Props, {}> {
         </View>
 
         <View className="info-frame" grow column>
-          <View className="header" style={{ height: '35px' }}>
+          <View className="header" style={{ height: '38px' }}>
             <View className="name" style={{ height: '100%' }} grow>
               <h1>{rest.name}</h1>
             </View>

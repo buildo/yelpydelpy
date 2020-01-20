@@ -1,32 +1,81 @@
 $left-space: 8px;
 
 .restaurant-preview {
-  border: 1px solid red;
+  // border: 1px solid red;
+  border-radius: 10px;
+  background-color: #dcf4ec;
 
-  .category-tag {
-    color: white;
-    background-color: grey;
-    border-radius: 3px;
+  .image-frame {
+    img {
+      border-radius: 5px;
+    }
   }
 
   .info-frame {
-    h1 {
-      font-size: 25px;
-      font-weight: bold;
-      margin: 5px $left-space;
+    .header {
+      .name {
+        h1 {
+          font-size: 25px;
+          font-weight: bold;
+          margin: 5px $left-space;
+        }
+      }
+      .signal {
+        h1 {
+          font-size: 15px;
+          font-weight: bold;
+
+          color: white;
+          border-radius: 10px;
+          padding: 0px 8px;
+          line-height: 20px;
+          text-align: center;
+          font-weight: bold;
+
+          &.open {
+            background-color: green;
+          }
+
+          &.closed {
+            background-color: red;
+          }
+        }
+      }
     }
 
-    h2 {
-      font-size: 15px;
-      font-weight: lighter;
-      margin: 0px $left-space;
+    .address {
+      h2 {
+        font-size: 15px;
+        font-weight: lighter;
+        margin: 0px $left-space;
+      }
     }
 
-    .rating {
-      img {
-        height: 15px;
-        width: 15px;
-        margin-right: 3px;
+    .categories-list {
+      .category-tag {
+        color: white;
+        background-color: #65ceab;
+        border-radius: 3px;
+        padding: 2px 4px;
+      }
+    }
+
+    .footer {
+      .rating {
+        img {
+          height: 20px;
+          width: 20px;
+          margin-right: 5px;
+        }
+      }
+
+      .distance {
+        h1 {
+          font-weight: bold;
+          font-size: 15px;
+          line-height: 25px;
+          margin: 0px 10px;
+        }
       }
     }
   }

@@ -19,6 +19,8 @@ import { SearchParams } from 'src/model/searchParams';
 import { CurrentView } from 'src/model';
 import { doUpdateCurrentView } from '../../commands';
 
+import './app.scss';
+
 // TODO: remove mock
 import mockResponse from './../../mock/yelpResponse.json';
 import { YelpSearchResponse } from 'src/model/yelpResponse';
@@ -52,14 +54,18 @@ class App extends React.Component<typeof queries.Props> {
         return (
           <View column height="100%" hAlignContent="center" vAlignContent="center" className="app">
             <h1>yelpydelpy</h1>
-            <View column shrink={false} style={{ minWidth: '50%' }}>
-              <SearchBar
-                currentSearchParams={currentSearchParams(currentView)}
-                onSearch={this.search}
-              />
+            <SearchBar
+              currentSearchParams={currentSearchParams(currentView)}
+              onSearch={this.search}
+            />
+            <View
+              column
+              shrink={false}
+              style={{ maxHeight: '85%', minWidth: '50%', overflow: 'scroll' }}
+            >
               {this.restaurantsList.map(restaurant => {
                 return (
-                  <View style={{ margin: '10px 0px' }}>
+                  <View style={{ minHeight: '120px', margin: '10px 0px' }}>
                     <RestaurantPreview restaurant={restaurant} />
                   </View>
                 );

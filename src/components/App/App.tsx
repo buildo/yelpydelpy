@@ -52,17 +52,25 @@ class App extends React.Component<typeof queries.Props> {
       () => null,
       ({ currentView }) => {
         return (
-          <View column height="100%" hAlignContent="center" vAlignContent="center" className="app">
-            <h1>yelpydelpy</h1>
-            <SearchBar
-              currentSearchParams={currentSearchParams(currentView)}
-              onSearch={this.search}
-            />
-            <View
-              column
-              shrink={false}
-              style={{ maxHeight: '85%', minWidth: '50%', overflow: 'scroll' }}
-            >
+          <View
+            column
+            style={{ height: '100%', overflow: 'auto' }}
+            hAlignContent="center"
+            // vAlignContent="center" TODO: apply only on homepage
+            className="app"
+          >
+            <View shrink={false}>
+              <h1>yelpydelpy</h1>
+            </View>
+
+            <View shrink={false} style={{ marginBottom: '10px' }}>
+              <SearchBar
+                currentSearchParams={currentSearchParams(currentView)}
+                onSearch={this.search}
+              />
+            </View>
+
+            <View column shrink={false} style={{ minWidth: '50%' }}>
               {this.restaurantsList.map(restaurant => {
                 return (
                   <View style={{ minHeight: '120px', margin: '10px 0px' }}>

@@ -19,6 +19,13 @@ import { SearchParams } from 'src/model/searchParams';
 import { CurrentView } from 'src/model';
 import { doUpdateCurrentView } from '../../commands';
 
+import './app.scss';
+
+// TODO: remove mock
+import mockResponse from './../../mock/yelpResponse.json';
+import { YelpSearchResponse } from 'src/model/yelpResponse';
+import RestaurantPreview from '../Shared/RestaurantPreview/RestaurantPreview';
+
 function currentSearchParams(currentView: CurrentView): SearchParams {
   switch (currentView.view) {
     case 'search':
@@ -31,6 +38,9 @@ function currentSearchParams(currentView: CurrentView): SearchParams {
 const queries = declareQueries({ currentView });
 
 class App extends React.Component<typeof queries.Props> {
+  // TODO: remove mock
+  private restaurantsList = (mockResponse as YelpSearchResponse).businesses;
+
   // when the user makes a research, update the URL with query params
   search = (res: SearchParams) => {
     doUpdateCurrentView({ view: 'search', ...res }).run();
@@ -42,14 +52,35 @@ class App extends React.Component<typeof queries.Props> {
       () => null,
       ({ currentView }) => {
         return (
-          <View column height="100%" hAlignContent="center" vAlignContent="center" className="app">
-            <h1>yelpydelpy</h1>
-            <View shrink={false} style={{ minWidth: '50%' }}>
+          <View
+            column
+            style={{ height: '100%', overflow: 'auto' }}
+            hAlignContent="center"
+            vAlignContent={currentView.view === 'search' ? 'top' : 'center'}
+            className="app"
+          >
+            <View shrink={false}>
+              <h1>yelpydelpy</h1>
+            </View>
+
+            <View shrink={false} style={{ marginBottom: '10px' }}>
               <SearchBar
-                onSearch={this.search}
                 currentSearchParams={currentSearchParams(currentView)}
+                onSearch={this.search}
               />
             </View>
+
+            {currentView.view === 'search' && (
+              <View column shrink={false} style={{ minWidth: '50%' }}>
+                {this.restaurantsList.map(restaurant => {
+                  return (
+                    <View style={{ minHeight: '120px', margin: '10px 0px' }}>
+                      <RestaurantPreview restaurant={restaurant} />
+                    </View>
+                  );
+                })}
+              </View>
+            )}
           </View>
         );
       }

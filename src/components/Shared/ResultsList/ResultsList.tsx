@@ -35,9 +35,13 @@ class ResultsList extends React.Component<Props, {}> {
         </View>
       ),
       ({ restaurants }) => (
-        <View className="results-list" grow>
+        <View column className="results-list" style={{ height: '100%', width: '100%' }}>
           {restaurants.map(rest => {
-            return <RestaurantPreview restaurant={rest} />;
+            return (
+              <View key={rest.id} style={{ minHeight: '120px', margin: '10px 0px' }}>
+                <RestaurantPreview restaurant={rest} />
+              </View>
+            );
           })}
         </View>
       )

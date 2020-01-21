@@ -4,6 +4,7 @@ import { pipe } from 'fp-ts/lib/pipeable';
 import { SearchParams } from 'src/model/searchParams';
 import { YelpSearchResponse } from '../model/YelpSearchResponse';
 
+// NOTE: use corsproxy-https to avoid CORS issues
 export const getRestaurants = (
   params: SearchParams
 ): TE.TaskEither<unknown, YelpSearchResponse> => {
@@ -17,7 +18,6 @@ export const getRestaurants = (
 
 const init: RequestInit = {
   method: 'GET',
-  mode: 'no-cors',
   headers: {
     Authorization:
       'Bearer edf9Mob9S677EmT7ZS4L6xRNU38RvVlbrHGiJ36g16ITkUsZv79M4aZHPC79tf0CAYKJwxeygKfIU1bvedQ4_FbgIQYK-aCAFh4KvJtIOx7vcZZlnKAs_QeBoCsfXnYx'

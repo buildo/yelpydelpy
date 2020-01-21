@@ -65,7 +65,7 @@ class App extends React.Component<typeof queries.Props> {
             </View>
 
             {currentView.view === 'search' && (
-              <View column shrink={false} style={{ minWidth: '50%' }}>
+              <View column shrink={false} style={{ minWidth: '50%', minHeight: '50%' }}>
                 <ResultsList
                   queries={{
                     restaurants: { range: currentView.range, location: currentView.location }

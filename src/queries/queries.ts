@@ -4,7 +4,7 @@ In this file we can define all the avenger queries that are needed in our app.
 
 */
 
-import { queryStrict, available, refetch } from 'avenger';
+import { queryStrict, refetch } from 'avenger';
 import { getCurrentView } from 'avenger/lib/browser';
 import * as API from '../API';
 import { locationToView } from '../model';
@@ -15,24 +15,19 @@ import * as TE from 'fp-ts/lib/TaskEither';
 
 export const currentView = getCurrentView(locationToView);
 
-// example
-export const randomName = queryStrict(API.getRandomName, available);
-
 export const restaurants = queryStrict(
   (params: SearchParams) =>
     pipe(
       API.getRestaurants(params),
       TE.map(resp => resp.businesses)
     ),
+  refetch
 
+  //   EXAMPLE:
+  //
   //   flow(
   //     API.getRestaurants,
   //     TE.map(resp => resp.businesses)
   //   ),
-
-  //   API.getRestaurants,
-
-  //   (params: SearchParams) => API.getRestaurants(params),
-
-  refetch
+  //  refetch
 );

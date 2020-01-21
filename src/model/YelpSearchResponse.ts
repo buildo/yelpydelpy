@@ -37,7 +37,7 @@ export const Business = t.type(
 export type Business = t.TypeOf<typeof Business>;
 
 export const YelpSearchResponse = t.type({ businesses: t.array(Business) }, 'YelpSearchResponse');
-export type YelpSearchResponse = t.TypeOf<typeof YelpSearchResponse>;
+export interface YelpSearchResponse extends t.TypeOf<typeof YelpSearchResponse> {}
 
 export const Price = t.union(
   [t.literal('€'), t.literal('€€'), t.literal('€€€'), t.literal('€€€€')],

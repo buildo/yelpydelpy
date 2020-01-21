@@ -1,10 +1,26 @@
 import * as React from 'react';
 import View from '../../Basic/View';
+import { declareQueries } from 'avenger/lib/react';
+import { restaurants } from '../../../queries';
+import RestaurantPreview from '../RestaurantPreview/RestaurantPreview';
 
-type Props = {};
+const queries = declareQueries({ restaurants });
 
-export default class ResultsList extends React.Component<Props, {}> {
+type Props = typeof queries.Props;
+
+class ResultsList extends React.Component<Props, {}> {
   render() {
-    return <View className="results-list" grow></View>;
+    return this.props.queries.fold(
+      () => <>loading</>,
+      () => <>error</>,
+      ({ restaurants }) => (
+        <View className="results-list" grow>
+          {restaurants.map(rest => {
+            return <RestaurantPreview restaurant={rest} />;
+          })}
+        </View>
+      )
+    );
   }
 }
+export default queries(ResultsList);

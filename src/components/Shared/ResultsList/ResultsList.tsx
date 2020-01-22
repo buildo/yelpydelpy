@@ -5,13 +5,13 @@ import { restaurants } from '../../../queries';
 import RestaurantPreview from '../RestaurantPreview/RestaurantPreview';
 import Spinner from '../Spinner/Spinner';
 import Modal from '../../Basic/Modal/Modal';
+import RestaurantDetails from '../RestaurantDetails/RestaurantDetails';
+import { BusinessDetails } from 'src/model/YelpResponse';
 
 const errorIcon = require('./../../../images/error.png');
 
 // TODO: remove mock
 import mockDetails from '../../../mock/yelpRestaurantDetail.json';
-import RestaurantDetails from '../RestaurantDetails/RestaurantDetails';
-import { BusinessDetails } from 'src/model/YelpResponse';
 
 const queries = declareQueries({ restaurants });
 

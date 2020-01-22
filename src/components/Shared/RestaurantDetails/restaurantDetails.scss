@@ -5,8 +5,15 @@
       font-weight: bold;
     }
     .day-name {
-      font-size: 13px;
+      font-size: 14px;
       font-weight: bold;
     }
+    .opening-time {
+      white-space: pre;
+    }
+  }
+
+  .phone-number {
+    font-size: 17px;
   }
 }

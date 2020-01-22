@@ -1,9 +1,8 @@
 import * as React from 'react';
 import View from '../../Basic/View';
 
-import './restaurantPreview.scss';
 import RestaurantPreview from '../RestaurantPreview/RestaurantPreview';
-import { BusinessDetails } from 'src/model/YelpResponse';
+import { BusinessDetails, Open } from 'src/model/YelpResponse';
 
 type Props = {
   restaurant: BusinessDetails;
@@ -14,36 +13,30 @@ export default class RestaurantDetails extends React.Component<Props, {}> {
     const rest = this.props.restaurant;
     const lat = rest.coordinates.latitude;
     const long = rest.coordinates.longitude;
+    const open = stringifyOpenHours(rest.hours.open);
 
     return (
-      <View className="restaurant-details" grow>
+      <View column grow shrink={false} className="restaurant-details">
         <View className="header">
           <RestaurantPreview restaurant={rest} />
         </View>
 
-        <View className="hour-map">
-          <View column className="hours">
-            <h1>Hours</h1>
-            <h2>
-              <b>mon:</b>{' '}
-            </h2>
-            <h2>
-              <b>tue:</b>{' '}
-            </h2>
-            <h2>
-              <b>wed:</b>{' '}
-            </h2>
-            <h2>
-              <b>thu:</b>{' '}
-            </h2>
-            <h2>
-              <b>fri:</b>{' '}
-            </h2>
-            <h2>
-              <b>sun:</b>{' '}
-            </h2>
+        <View className="info-box" style={{ marginTop: '10px' }}>
+          <View column className="hour" style={{ width: '40%' }}>
+            <div className="title">Hours</div>
+            {['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'].map((dayName, i) => (
+              <View key={dayName} style={{ width: '100%' }}>
+                <View style={{ width: '50px' }} className="day-name">
+                  {dayName}
+                </View>
+                <View grow className="opening-time">
+                  {open[i]}
+                </View>
+              </View>
+            ))}
           </View>
-          <View className="map">
+
+          <View column className="map" style={{ width: '60%' }}>
             <iframe
               width="100%"
               height="100%"
@@ -63,7 +56,7 @@ export default class RestaurantDetails extends React.Component<Props, {}> {
 
         <View className="photos">
           {rest.photos.map(url => (
-            <img style={{ height: '120px', width: '180px' }} src={url} />
+            <img key={url} style={{ height: '120px', width: '180px' }} src={url} />
           ))}
         </View>
       </View>
@@ -71,5 +64,21 @@ export default class RestaurantDetails extends React.Component<Props, {}> {
   }
 }
 
-const googleMapsAPIKey = 'AIzaSyBele7DDxzyCaIeiCy8NJbR7RzZV8Inlbw';
+const googleMapsAPIKey = ''; // TODO: need ap key
 const googleMapsAPIEndpoint = 'https://www.google.com/maps/embed/v1/place';
+
+function stringifyOpenHours(opens: Open[]): string[] {
+  let days = Array<string>(7).fill('');
+
+  if (!opens) return days;
+
+  // group up turns
+  opens.forEach(open => {
+    //TODO: security check
+    const start = `${open.start.substring(0, 2)}:${open.start.substring(2, 2)}`;
+    const end = `${open.end.substring(0, 2)}:${open.end.substring(2, 2)}`;
+    const out = start + ' - ' + end + '; ';
+    days[open.day].concat(out);
+  });
+  return days;
+}

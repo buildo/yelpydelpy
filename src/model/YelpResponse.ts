@@ -30,7 +30,7 @@ export const Business = t.type(
     categories: t.array(Category),
     rating: t.number,
     location: Location,
-    distance: t.number
+    distance: t.number || undefined
   },
   'Business'
 );
@@ -82,7 +82,7 @@ export const BusinessDetails = t.type(
     review_count: t.number,
     photos: t.array(t.string),
     price: t.string,
-    hours: t.array(Hour),
+    hours: Hour,
     coordinates: Coordinates
   },
   'BusinessDetails'

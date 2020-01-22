@@ -6,21 +6,18 @@ import RestaurantPreview from '../RestaurantPreview/RestaurantPreview';
 import Spinner from '../Spinner/Spinner';
 import Modal from '../../Basic/Modal/Modal';
 import RestaurantDetails from '../RestaurantDetails/RestaurantDetails';
-import { BusinessDetails } from 'src/model/YelpResponse';
 
 const errorIcon = require('./../../../images/error.png');
-
-// TODO: remove mock
-import mockDetails from '../../../mock/yelpRestaurantDetail.json';
 
 const queries = declareQueries({ restaurants });
 
 type Props = typeof queries.Props;
+type State = { openedModal: string | null };
 
-class ResultsList extends React.Component<Props, { isModalOpen: boolean }> {
+class ResultsList extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    this.state = { isModalOpen: false };
+    this.state = { openedModal: null };
   }
 
   render() {
@@ -35,6 +32,7 @@ class ResultsList extends React.Component<Props, { isModalOpen: boolean }> {
           <Spinner />
         </View>
       ),
+
       () => (
         <View
           className="error-wrapper"
@@ -45,6 +43,7 @@ class ResultsList extends React.Component<Props, { isModalOpen: boolean }> {
           <img style={{ height: '50px', width: '50px' }} src={errorIcon} />
         </View>
       ),
+
       ({ restaurants }) => (
         <View column className="results-list" style={{ height: '100%', width: '100%' }}>
           {restaurants.map(rest => {
@@ -53,37 +52,38 @@ class ResultsList extends React.Component<Props, { isModalOpen: boolean }> {
                 key={rest.id}
                 style={{ minHeight: '120px', margin: '10px 0px' }}
                 onClick={() => {
-                  this.open();
+                  this.open(rest.id);
                 }}
               >
                 <RestaurantPreview restaurant={rest} />
               </View>
             );
           })}
-          {this.state.isModalOpen && this.getModal()}
+
+          {this.state.openedModal && this.getModal(this.state.openedModal)}
         </View>
       )
     );
   }
 
-  getModal() {
+  getModal(id: string) {
     return (
       <Modal
         transitionEnterTimeout={500}
         transitionLeaveTimeout={500}
         onDismiss={() => this.close()}
       >
-        <RestaurantDetails restaurant={(mockDetails as unknown) as BusinessDetails} />
+        <RestaurantDetails queries={{ restaurantDetails: id }} />
       </Modal>
     );
   }
 
-  open() {
-    this.setState({ isModalOpen: true });
+  open(id: string) {
+    this.setState({ openedModal: id });
   }
 
   close() {
-    this.setState({ isModalOpen: false });
+    this.setState({ openedModal: null });
   }
 }
 export default queries(ResultsList);

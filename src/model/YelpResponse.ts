@@ -23,14 +23,13 @@ export type Location = t.TypeOf<typeof Location>;
 export const Business = t.type(
   {
     id: t.string,
-    alias: t.string,
     name: t.string,
     image_url: t.string,
     is_closed: t.boolean,
     categories: t.array(Category),
     rating: t.number,
     location: Location,
-    distance: t.number || undefined
+    distance: t.union([t.number, t.undefined])
   },
   'Business'
 );

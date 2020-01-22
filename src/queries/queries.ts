@@ -4,7 +4,7 @@ In this file we can define all the avenger queries that are needed in our app.
 
 */
 
-import { queryStrict, refetch } from 'avenger';
+import { queryStrict, refetch, available } from 'avenger';
 import { getCurrentView } from 'avenger/lib/browser';
 import * as API from '../API';
 import { locationToView } from '../model';
@@ -21,4 +21,13 @@ export const restaurants = queryStrict(
       TE.map(resp => resp.businesses)
     ),
   refetch
+);
+
+export const restaurantDetails = queryStrict(
+  (id: string) =>
+    pipe(
+      API.getRestaurantDetails(id),
+      TE.map(business => business)
+    ),
+  available
 );

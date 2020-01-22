@@ -1,56 +1,46 @@
-export interface YelpSearchResponse {
-  businesses: Business[];
-  total: number;
-  region: Region;
-}
+import * as t from 'io-ts';
 
-export interface Business {
-  id: string;
-  alias: string;
-  name: string;
-  image_url: string;
-  is_closed: boolean;
-  url: string;
-  review_count: number;
-  categories: Category[];
-  rating: number;
-  coordinates: Center;
-  transactions: any[];
-  price?: Price;
-  location: Location;
-  phone: string;
-  display_phone: string;
-  distance: number;
-}
+export const Category = t.type(
+  {
+    alias: t.string,
+    title: t.string
+  },
+  'Category'
+);
+export type Category = t.TypeOf<typeof Category>;
 
-export interface Category {
-  alias: string;
-  title: string;
-}
+export const Location = t.type(
+  {
+    address1: t.string,
+    city: t.string,
+    country: t.string,
+    state: t.string
+  },
+  'Location'
+);
+export type Location = t.TypeOf<typeof Location>;
 
-export interface Location {
-  address1: string;
-  address2: null | string;
-  address3: null | string;
-  city: string;
-  zip_code: string;
-  country: string;
-  state: string;
-  display_address: string[];
-}
+export const Business = t.type(
+  {
+    id: t.string,
+    alias: t.string,
+    name: t.string,
+    image_url: t.string,
+    is_closed: t.boolean,
+    categories: t.array(Category),
+    rating: t.number,
+    location: Location,
+    distance: t.number
+  },
+  'Business'
+);
+export type Business = t.TypeOf<typeof Business>;
 
-export enum Price {
-  Low = '€',
-  Medium = '€€',
-  High = '€€€',
-  Fancy = '€€€€'
-}
+export const YelpSearchResponse = t.type({ businesses: t.array(Business) }, 'YelpSearchResponse');
+export interface YelpSearchResponse extends t.TypeOf<typeof YelpSearchResponse> {}
 
-export interface Region {
-  center: Center;
-}
-
-export interface Center {
-  latitude: number;
-  longitude: number;
-}
+export const Price = t.union(
+  [t.literal('€'), t.literal('€€'), t.literal('€€€'), t.literal('€€€€')],
+  'Price'
+);
+export type Price = t.TypeOf<typeof Price>;

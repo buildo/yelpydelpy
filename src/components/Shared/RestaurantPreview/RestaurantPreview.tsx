@@ -39,7 +39,7 @@ export default class RestaurantPreview extends React.Component<Props, {}> {
           <View className="categories-list" style={{ height: '20px', margin: '7px 8px' }}>
             {rest.categories.map(cat => {
               return (
-                <View style={{ marginRight: '5px' }} className="category-tag">
+                <View key={cat.alias} style={{ marginRight: '5px' }} className="category-tag">
                   {cat.title}
                 </View>
               );
@@ -48,9 +48,9 @@ export default class RestaurantPreview extends React.Component<Props, {}> {
 
           <View className="footer" style={{ height: '25px' }}>
             <View className="rating" grow style={{ height: '100%', margin: '0px 8px' }}>
-              {[...Array(Math.trunc(rest.rating))].map(() => {
-                return <img src={star} />;
-              })}
+              {[...Array(Math.trunc(rest.rating))].map((_, index) => (
+                <img key={index} src={star} />
+              ))}
             </View>
             <View className="distance" style={{ height: '100%' }}>
               <h1>

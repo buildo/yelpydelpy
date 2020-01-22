@@ -19,10 +19,6 @@ export default class RestaurantDetails extends React.Component<Props, {}> {
     const long = rest.coordinates.longitude;
     const photos = rest.photos.length > 3 ? rest.photos.slice(0, 3) : rest.photos;
 
-    // TODO: remove
-    console.log('hours', this.props.restaurant.hours[0]);
-    console.log('open', this.props.restaurant.hours[0].open);
-
     const openTimes = stringifyOpenHours(rest.hours[0].open);
 
     return (
@@ -50,7 +46,7 @@ export default class RestaurantDetails extends React.Component<Props, {}> {
             <iframe
               width="100%"
               height="100%"
-              src={`${googleMapsAPIEndpoint}?key=${googleMapsAPIKey}&center=${lat},${long}&zoom=18`}
+              src={`${googleMapsAPIEndpoint}?key=${googleMapsAPIKey}&q=${lat},${long}&zoom=18`}
             />
           </View>
         </View>
@@ -76,19 +72,18 @@ export default class RestaurantDetails extends React.Component<Props, {}> {
   }
 }
 
-const googleMapsAPIKey = ''; // TODO: need ap key
+const googleMapsAPIKey = 'AIzaSyDDUbzwLfSKpbo6GI_oi90IOi8DhRzkzQo';
 const googleMapsAPIEndpoint = 'https://www.google.com/maps/embed/v1/place';
 
 function stringifyOpenHours(opens: Open[]): string[] {
-  console.log('stringifyOpenHours', opens);
-
   let days = Array<string>(7).fill('');
 
   if (!opens) return days;
 
   // group up turns
   opens.forEach(open => {
-    //TODO: security check
+    if (open.start.length !== 4 || open.end.length !== 4) return;
+
     const start = `${open.start.substring(0, 2)}:${open.start.substring(2, 4)}`;
     const end = `${open.end.substring(0, 2)}:${open.end.substring(2, 4)}`;
     const out = start + '-' + end + '     ';

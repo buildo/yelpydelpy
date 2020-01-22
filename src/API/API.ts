@@ -2,7 +2,7 @@ import * as TE from 'fp-ts/lib/TaskEither';
 import { identity } from 'fp-ts/lib/function';
 import { pipe } from 'fp-ts/lib/pipeable';
 import { SearchParams } from 'src/model/searchParams';
-import { YelpSearchResponse } from '../model/YelpSearchResponse';
+import { YelpSearchResponse } from '../model/YelpResponse';
 
 // NOTE: use corsproxy-https to avoid CORS issues
 export const getRestaurants = (

@@ -34,7 +34,7 @@ export const Business = t.type(
   },
   'Business'
 );
-export type Business = t.TypeOf<typeof Business>;
+export interface Business extends t.TypeOf<typeof Business> {}
 
 export const YelpSearchResponse = t.type({ businesses: t.array(Business) }, 'YelpSearchResponse');
 export interface YelpSearchResponse extends t.TypeOf<typeof YelpSearchResponse> {}
@@ -44,3 +44,47 @@ export const Price = t.union(
   'Price'
 );
 export type Price = t.TypeOf<typeof Price>;
+
+export const Open = t.type(
+  {
+    is_overnight: t.boolean,
+    start: t.string,
+    end: t.string,
+    day: t.number
+  },
+  'Open'
+);
+export interface Open extends t.TypeOf<typeof Open> {}
+
+export const Hour = t.type(
+  {
+    open: t.array(Open),
+    hours_type: t.string,
+    is_open_now: t.boolean
+  },
+  'Hour'
+);
+export interface Hour extends t.TypeOf<typeof Hour> {}
+
+export const Coordinates = t.type(
+  {
+    latitude: t.number,
+    longitude: t.number
+  },
+  'Coordinates'
+);
+export interface Coordinates extends t.TypeOf<typeof Coordinates> {}
+
+export const BusinessDetails = t.type(
+  {
+    ...Business.props,
+    display_phone: t.string,
+    review_count: t.number,
+    photos: t.array(t.string),
+    price: t.string,
+    hours: t.array(Hour),
+    coordinates: Coordinates
+  },
+  'BusinessDetails'
+);
+export interface BusinessDetails extends t.TypeOf<typeof BusinessDetails> {}

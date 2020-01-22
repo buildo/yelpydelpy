@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Business } from 'src/model/YelpSearchResponse';
+import { Business } from 'src/model/YelpResponse';
 import View from '../../Basic/View';
 
 import './restaurantPreview.scss';

@@ -3737,11 +3737,6 @@ io-ts@^1.10.4:
   dependencies:
     fp-ts "^1.0.0"
 
-io-ts@^2.0.5:
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/io-ts/-/io-ts-2.0.5.tgz#e6e3db9df8b047f9cbd6b69e7d2ad3e6437a0b13"
-  integrity sha512-pL7uUptryanI5Glv+GUv7xh+aLBjxGEDmLwmEYNSx0yOD3djK0Nw5Bt0N6BAkv9LadOUU7QKpRsLcqnTh3UlLA==
-
 ip-regex@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/ip-regex/-/ip-regex-2.1.0.tgz#fa78bf5d2e6913c911ce9f819ee5146bb6d844e9"

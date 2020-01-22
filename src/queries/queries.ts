@@ -4,15 +4,21 @@ In this file we can define all the avenger queries that are needed in our app.
 
 */
 
-//import { queryStrict, available } from 'avenger';
+import { queryStrict, refetch } from 'avenger';
 import { getCurrentView } from 'avenger/lib/browser';
 import * as API from '../API';
 import { locationToView } from '../model';
-
-import { YelpSearchResponse } from 'src/model/yelpResponse';
+import { pipe } from 'fp-ts/lib/pipeable';
+import { SearchParams } from 'src/model/searchParams';
+import * as TE from 'fp-ts/lib/TaskEither';
 
 export const currentView = getCurrentView(locationToView);
 
-export function queryRestaurants(location: string, radius: number): Promise<YelpSearchResponse> {
-  return API.searchRestaurants(location, radius);
-}
+export const restaurants = queryStrict(
+  (params: SearchParams) =>
+    pipe(
+      API.getRestaurants(params),
+      TE.map(resp => resp.businesses)
+    ),
+  refetch
+);

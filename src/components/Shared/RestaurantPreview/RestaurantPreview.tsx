@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Business } from 'src/model/YelpSearchResponse';
+import { Business } from 'src/model/YelpResponse';
 import View from '../../Basic/View';
 
 import './restaurantPreview.scss';
@@ -52,13 +52,15 @@ export default class RestaurantPreview extends React.Component<Props, {}> {
                 <img key={index} src={star} />
               ))}
             </View>
-            <View className="distance" style={{ height: '100%' }}>
-              <h1>
-                {Math.trunc(rest.distance) > 999
-                  ? Math.round(rest.distance * 10) / 10 + 'km'
-                  : Math.trunc(rest.distance) + 'm'}
-              </h1>
-            </View>
+            {rest.distance && (
+              <View className="distance" style={{ height: '100%' }}>
+                <h1>
+                  {Math.trunc(rest.distance) > 999
+                    ? Math.round(rest.distance * 10) / 10 + 'km'
+                    : Math.trunc(rest.distance) + 'm'}
+                </h1>
+              </View>
+            )}
           </View>
         </View>
       </View>

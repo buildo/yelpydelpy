@@ -56,14 +56,12 @@ class App extends React.Component<typeof queries.Props> {
             <View shrink={false}>
               <h1>yelpydelpy</h1>
             </View>
-
             <View shrink={false} style={{ marginBottom: '10px' }}>
               <SearchBar
                 currentSearchParams={currentSearchParams(currentView)}
                 onSearch={this.search}
               />
             </View>
-
             {currentView.view === 'search' && (
               <View column shrink={false} style={{ minWidth: '50%', minHeight: '50%' }}>
                 <ResultsList

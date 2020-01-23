@@ -48,6 +48,11 @@ class ResultsList extends React.Component<Props, State> {
         <View column className="results-list" style={{ height: '100%', width: '100%' }}>
           {restaurants
             .filter(rest => !rest.is_closed)
+            .sort((a, b) => {
+              const aDist = a.distance ? a.distance : 0;
+              const bDist = b.distance ? b.distance : 0;
+              return aDist - bDist;
+            })
             .map(rest => {
               return (
                 <View

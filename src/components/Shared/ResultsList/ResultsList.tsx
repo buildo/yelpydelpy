@@ -46,19 +46,21 @@ class ResultsList extends React.Component<Props, State> {
 
       ({ restaurants }) => (
         <View column className="results-list" style={{ height: '100%', width: '100%' }}>
-          {restaurants.map(rest => {
-            return (
-              <View
-                key={rest.id}
-                style={{ minHeight: '120px', margin: '10px 0px' }}
-                onClick={() => {
-                  this.open(rest.id);
-                }}
-              >
-                <RestaurantPreview restaurant={rest} />
-              </View>
-            );
-          })}
+          {restaurants
+            .filter(rest => !rest.is_closed)
+            .map(rest => {
+              return (
+                <View
+                  key={rest.id}
+                  style={{ minHeight: '120px', margin: '10px 0px' }}
+                  onClick={() => {
+                    this.open(rest.id);
+                  }}
+                >
+                  <RestaurantPreview restaurant={rest} />
+                </View>
+              );
+            })}
 
           {this.state.openedModal && this.getModal(this.state.openedModal)}
         </View>

@@ -53,7 +53,7 @@ class RestaurantDetails extends React.Component<Props, {}> {
             </View>
 
             <View className="info-box" shrink={false} style={{ marginTop: '10px' }}>
-              <View column className="hour" style={{ width: '40%' }}>
+              <View column className="hour" style={{ width: '45%' }}>
                 <View className="title">Hours</View>
                 {['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'].map((dayName, i) => (
                   <View key={dayName} style={{ width: '100%' }}>
@@ -67,7 +67,7 @@ class RestaurantDetails extends React.Component<Props, {}> {
                 ))}
               </View>
 
-              <View column className="map" style={{ width: '60%' }}>
+              <View column className="map" style={{ width: '55%' }}>
                 <iframe
                   width="100%"
                   height="100%"
@@ -125,5 +125,7 @@ function stringifyOpenHours(opens: Open[]): string[] {
     days[open.day] = days[open.day].concat(out);
   });
 
-  return days;
+  return days.map(openTimeDescription => {
+    return openTimeDescription.trim() === '' ? 'closed' : openTimeDescription.trim();
+  });
 }

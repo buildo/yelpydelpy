@@ -1,0 +1,25 @@
+.restaurant-details {
+  .hour {
+    .title {
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .day-name {
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .opening-time {
+      white-space: pre;
+    }
+  }
+
+  .map {
+    iframe {
+      border-style: none;
+    }
+  }
+
+  .phone-number {
+    font-size: 17px;
+  }
+}

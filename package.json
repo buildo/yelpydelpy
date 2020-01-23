@@ -1,0 +1,29 @@
+{
+  "name": "my-app",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "scriptoni web-dev -c ./config",
+    "build": "NODE_ENV=production scriptoni web-build -c ./config"
+  },
+  "dependencies": {
+    "avenger": "^5.0.0",
+    "buildo-normalize-css": "^3.0.2",
+    "buildo-react-components": "^0.44.1",
+    "classnames": "^2.2.6",
+    "es6-promise": "^4.2.8",
+    "io-ts": "^1.10.4",
+    "fp-ts": "^1.19.5",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-flexview": "^4.0.3",
+    "react-intl": "^2.9.0"
+  },
+  "devDependencies": {
+    "@types/classnames": "^2.2.9",
+    "@types/fixed-data-table": "^0.6.35",
+    "@types/react": "^16.9.1",
+    "@types/react-dom": "^16.8.5",
+    "@types/react-intl": "^2.3.18",
+    "scriptoni": "^8.0.0"
+  }
+}

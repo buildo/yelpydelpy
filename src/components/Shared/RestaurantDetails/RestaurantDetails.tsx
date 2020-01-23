@@ -29,23 +29,26 @@ class RestaurantDetails extends React.Component<Props, {}> {
           <Spinner />
         </View>
       ),
-      () => (
-        <View
-          className="error-wrapper"
-          style={{ height: '100%', width: '100%' }}
-          hAlignContent="center"
-          vAlignContent="center"
-        >
-          <img style={{ height: '50px', width: '50px' }} src={errorIcon} />
-        </View>
-      ),
+      error => {
+        console.log('error on query restaurantDetails', error);
+        return (
+          <View
+            className="error-wrapper"
+            style={{ height: '100%', width: '100%' }}
+            hAlignContent="center"
+            vAlignContent="center"
+          >
+            <img style={{ height: '50px', width: '50px' }} src={errorIcon} />
+          </View>
+        );
+      },
       ({ restaurantDetails }) => {
         const rest = restaurantDetails;
         const lat = rest.coordinates.latitude;
         const long = rest.coordinates.longitude;
         const photos = rest.photos.length > 3 ? rest.photos.slice(0, 3) : rest.photos;
 
-        const openTimes = stringifyOpenHours(rest.hours[0].open);
+        const openTimes = rest.hours ? stringifyOpenHours(rest.hours[0].open) : undefined;
         return (
           <View column shrink={false} className="restaurant-details">
             <View className="header">
@@ -55,16 +58,22 @@ class RestaurantDetails extends React.Component<Props, {}> {
             <View className="info-box" shrink={false} style={{ marginTop: '10px' }}>
               <View column className="hour" style={{ width: '45%' }}>
                 <View className="title">Hours</View>
-                {['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'].map((dayName, i) => (
-                  <View key={dayName} style={{ width: '100%' }}>
-                    <View style={{ width: '50px' }} className="day-name">
-                      {dayName}
+                {openTimes &&
+                  ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'].map((dayName, i) => (
+                    <View key={dayName} style={{ width: '100%' }}>
+                      <View style={{ width: '50px' }} className="day-name">
+                        {dayName}
+                      </View>
+                      <View grow className="opening-time">
+                        {openTimes[i]}
+                      </View>
                     </View>
-                    <View grow className="opening-time">
-                      {openTimes[i]}
-                    </View>
+                  ))}
+                {!openTimes && (
+                  <View vAlignContent="center" hAlignContent="center" grow>
+                    no data available
                   </View>
-                ))}
+                )}
               </View>
 
               <View column className="map" style={{ width: '55%' }}>
@@ -83,10 +92,12 @@ class RestaurantDetails extends React.Component<Props, {}> {
               className="info"
             >
               <View>
-                <img
-                  src={phoneIcon}
-                  style={{ height: '15px', width: '15px', marginRight: '10px' }}
-                />
+                {rest.display_phone && rest.display_phone !== '' && (
+                  <img
+                    src={phoneIcon}
+                    style={{ height: '15px', width: '15px', marginRight: '10px' }}
+                  />
+                )}
               </View>
               <View className="phone-number">{rest.display_phone}</View>
             </View>

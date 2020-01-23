@@ -56,8 +56,8 @@ export default class RestaurantPreview extends React.Component<Props, {}> {
               <View className="distance" style={{ height: '100%' }}>
                 <h1>
                   {Math.trunc(rest.distance) > 999
-                    ? Math.round(rest.distance * 10) / 10 + 'km'
-                    : Math.trunc(rest.distance) + 'm'}
+                    ? Math.round((rest.distance / 1000) * 10) / 10 + ' km'
+                    : Math.trunc(rest.distance) + ' m'}
                 </h1>
               </View>
             )}

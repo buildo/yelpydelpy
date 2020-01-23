@@ -114,8 +114,6 @@ const googleMapsAPIEndpoint = 'https://www.google.com/maps/embed/v1/place';
 function stringifyOpenHours(opens: Open[]): string[] {
   let days = Array<string>(7).fill('');
 
-  if (!opens) return days;
-
   // group up turns
   opens.forEach(open => {
     if (open.start.length !== 4 || open.end.length !== 4) return;
@@ -123,7 +121,9 @@ function stringifyOpenHours(opens: Open[]): string[] {
     const start = `${open.start.substring(0, 2)}:${open.start.substring(2, 4)}`;
     const end = `${open.end.substring(0, 2)}:${open.end.substring(2, 4)}`;
     const out = start + '-' + end + '     ';
+
     days[open.day] = days[open.day].concat(out);
   });
+
   return days;
 }

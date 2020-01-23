@@ -24,10 +24,6 @@ export const restaurants = queryStrict(
 );
 
 export const restaurantDetails = queryStrict(
-  (id: string) =>
-    pipe(
-      API.getRestaurantDetails(id),
-      TE.map(business => business)
-    ),
+  (id: string) => API.getRestaurantDetails(id),
   available
 );

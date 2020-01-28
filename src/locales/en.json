@@ -1,9 +1,16 @@
 {
-  "locales": [
-    "en"
-  ],
+  "locales": ["en"],
   "messages": {
-    "Hello.hello": "Hello {name}!",
-    "Hello.warningLength": "name length must be between 6 and 50"
+    "SearchBar.search": "Search",
+    "RestaurantDetails.hours": "Hours",
+    "RestaurantDetails.noData": "No available data",
+    "RestaurantDetails.mon": "Mon",
+    "RestaurantDetails.tue": "Tue",
+    "RestaurantDetails.wed": "Wed",
+    "RestaurantDetails.thu": "Thu",
+    "RestaurantDetails.fri": "Fri",
+    "RestaurantDetails.sat": "Sat",
+    "RestaurantDetails.sun": "Sun",
+    "RestaurantDetails.closed": "Chiuso"
   }
 }

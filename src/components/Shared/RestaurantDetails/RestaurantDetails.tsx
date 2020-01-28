@@ -22,7 +22,7 @@ class RestaurantDetails extends React.Component<Props, {}> {
       () => (
         <View
           className="spinner-wrapper"
-          style={{ height: '200px', width: '200px' }}
+          style={{ height: '200px', width: '200px', position: 'relative' }}
           hAlignContent="center"
           vAlignContent="center"
         >

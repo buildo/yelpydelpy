@@ -25,7 +25,7 @@ class ResultsList extends React.Component<Props, State> {
       () => (
         <View
           className="spinner-wrapper"
-          style={{ height: '100%', width: '100%' }}
+          style={{ height: '100%', width: '100%', position: 'relative' }}
           hAlignContent="center"
           vAlignContent="center"
         >

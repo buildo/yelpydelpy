@@ -7,7 +7,7 @@ import { Open } from 'src/model/YelpResponse';
 import './restaurantDetails.scss';
 import { declareQueries } from 'avenger/lib/react';
 import { restaurantDetails } from '../../../queries';
-import Spinner from '../Spinner/Spinner';
+import LoadingSpinner from '../../Basic/LoadingSpinner/LoadingSpinner';
 
 const errorIcon = require('./../../../images/error.png');
 const phoneIcon = require('./../../../images/phone.png');
@@ -22,11 +22,11 @@ class RestaurantDetails extends React.Component<Props, {}> {
       () => (
         <View
           className="spinner-wrapper"
-          style={{ height: '100%', width: '100%' }}
+          style={{ height: '200px', width: '200px' }}
           hAlignContent="center"
           vAlignContent="center"
         >
-          <Spinner />
+          <LoadingSpinner size={45} overlayColor="transparent" />
         </View>
       ),
       error => {

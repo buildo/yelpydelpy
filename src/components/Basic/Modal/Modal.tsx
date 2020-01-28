@@ -1,3 +1,3 @@
 import Modal from 'buildo-react-components/lib/Modal';
-import './Modal.scss';
+import './modal.scss';
 export default Modal;

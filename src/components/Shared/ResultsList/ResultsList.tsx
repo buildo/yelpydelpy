@@ -3,7 +3,7 @@ import View from '../../Basic/View';
 import { declareQueries } from 'avenger/lib/react';
 import { restaurants } from '../../../queries';
 import RestaurantPreview from '../RestaurantPreview/RestaurantPreview';
-import Spinner from '../Spinner/Spinner';
+import LoadingSpinner from '../../Basic/LoadingSpinner/LoadingSpinner';
 import Modal from '../../Basic/Modal/Modal';
 import RestaurantDetails from '../RestaurantDetails/RestaurantDetails';
 
@@ -29,7 +29,7 @@ class ResultsList extends React.Component<Props, State> {
           hAlignContent="center"
           vAlignContent="center"
         >
-          <Spinner />
+          <LoadingSpinner size={45} overlayColor="transparent" />
         </View>
       ),
 

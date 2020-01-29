@@ -8,6 +8,7 @@ import './restaurantDetails.scss';
 import { declareQueries } from 'avenger/lib/react';
 import { restaurantDetails } from '../../../queries';
 import LoadingSpinner from '../../Basic/LoadingSpinner/LoadingSpinner';
+import { FormattedMessage } from 'react-intl';
 
 const errorIcon = require('./../../../images/error.png');
 const phoneIcon = require('./../../../images/phone.png');
@@ -57,21 +58,27 @@ class RestaurantDetails extends React.Component<Props, {}> {
 
             <View className="info-box" shrink={false} style={{ marginTop: '10px' }}>
               <View column className="hour" style={{ width: '45%' }}>
-                <View className="title">Hours</View>
+                <View className="title">
+                  <FormattedMessage id="RestaurantDetails.hours" />
+                </View>
                 {openTimes &&
                   ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'].map((dayName, i) => (
                     <View key={dayName} style={{ width: '100%' }}>
                       <View style={{ width: '50px' }} className="day-name">
-                        {dayName}
+                        <FormattedMessage id={`RestaurantDetails.${dayName}`} />
                       </View>
                       <View grow className="opening-time">
-                        {openTimes[i]}
+                        {openTimes[i] !== '' ? (
+                          openTimes[i]
+                        ) : (
+                          <FormattedMessage id="RestaurantDetails.closed" />
+                        )}
                       </View>
                     </View>
                   ))}
                 {!openTimes && (
                   <View vAlignContent="center" hAlignContent="center" grow>
-                    no data available
+                    <FormattedMessage id="RestaurantDetails.noData" />
                   </View>
                 )}
               </View>
@@ -137,6 +144,6 @@ function stringifyOpenHours(opens: Open[]): string[] {
   });
 
   return days.map(openTimeDescription => {
-    return openTimeDescription.trim() === '' ? 'closed' : openTimeDescription.trim();
+    return openTimeDescription.trim();
   });
 }

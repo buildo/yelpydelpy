@@ -4,6 +4,7 @@ import View from '../../Basic/View';
 
 import './restaurantPreview.scss';
 
+const noPhotoPlaceholder = require('./../../../images/no-photo.png');
 const star = require('./../../../images/star.png');
 
 type Props = {
@@ -14,6 +15,8 @@ export default class RestaurantPreview extends React.Component<Props, {}> {
   render() {
     const rest = this.props.restaurant;
 
+    const photo = rest.image_url && rest.image_url !== '' ? rest.image_url : noPhotoPlaceholder;
+
     return (
       <View className="restaurant-preview" grow>
         <View
@@ -22,7 +25,7 @@ export default class RestaurantPreview extends React.Component<Props, {}> {
           vAlignContent="center"
           style={{ height: '120px', width: '120px' }}
         >
-          <img style={{ width: '90%', height: '90%' }} src={rest.image_url} alt="image" />
+          <img style={{ width: '90%', height: '90%' }} src={photo} alt={'image'} />
         </View>
 
         <View className="info-frame" grow column>
@@ -56,8 +59,8 @@ export default class RestaurantPreview extends React.Component<Props, {}> {
               <View className="distance" style={{ height: '100%' }}>
                 <h1>
                   {Math.trunc(rest.distance) > 999
-                    ? Math.round(rest.distance * 10) / 10 + 'km'
-                    : Math.trunc(rest.distance) + 'm'}
+                    ? Math.round((rest.distance / 1000) * 10) / 10 + ' km'
+                    : Math.trunc(rest.distance) + ' m'}
                 </h1>
               </View>
             )}

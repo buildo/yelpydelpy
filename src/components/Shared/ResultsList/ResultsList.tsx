@@ -3,7 +3,7 @@ import View from '../../Basic/View';
 import { declareQueries } from 'avenger/lib/react';
 import { restaurants } from '../../../queries';
 import RestaurantPreview from '../RestaurantPreview/RestaurantPreview';
-import Spinner from '../Spinner/Spinner';
+import LoadingSpinner from '../../Basic/LoadingSpinner/LoadingSpinner';
 import Modal from '../../Basic/Modal/Modal';
 import RestaurantDetails from '../RestaurantDetails/RestaurantDetails';
 
@@ -25,11 +25,11 @@ class ResultsList extends React.Component<Props, State> {
       () => (
         <View
           className="spinner-wrapper"
-          style={{ height: '100%', width: '100%' }}
+          style={{ height: '100%', width: '100%', position: 'relative' }}
           hAlignContent="center"
           vAlignContent="center"
         >
-          <Spinner />
+          <LoadingSpinner size={45} overlayColor="transparent" />
         </View>
       ),
 
@@ -46,19 +46,26 @@ class ResultsList extends React.Component<Props, State> {
 
       ({ restaurants }) => (
         <View column className="results-list" style={{ height: '100%', width: '100%' }}>
-          {restaurants.map(rest => {
-            return (
-              <View
-                key={rest.id}
-                style={{ minHeight: '120px', margin: '10px 0px' }}
-                onClick={() => {
-                  this.open(rest.id);
-                }}
-              >
-                <RestaurantPreview restaurant={rest} />
-              </View>
-            );
-          })}
+          {restaurants
+            .filter(rest => !rest.is_closed)
+            .sort((a, b) => {
+              const aDist = a.distance ? a.distance : 0;
+              const bDist = b.distance ? b.distance : 0;
+              return aDist - bDist;
+            })
+            .map(rest => {
+              return (
+                <View
+                  key={rest.id}
+                  style={{ minHeight: '120px', margin: '10px 0px' }}
+                  onClick={() => {
+                    this.open(rest.id);
+                  }}
+                >
+                  <RestaurantPreview restaurant={rest} />
+                </View>
+              );
+            })}
 
           {this.state.openedModal && this.getModal(this.state.openedModal)}
         </View>

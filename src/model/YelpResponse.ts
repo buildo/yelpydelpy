@@ -80,8 +80,8 @@ export const BusinessDetails = t.type(
     display_phone: t.string,
     review_count: t.number,
     photos: t.array(t.string),
-    price: t.string,
-    hours: t.array(Hour),
+    price: t.union([t.string, t.undefined]),
+    hours: t.union([t.array(Hour), t.undefined]),
     coordinates: Coordinates
   },
   'BusinessDetails'

@@ -59,6 +59,7 @@ export default class SearchBar extends React.Component<Props, State> {
             style={{ width: '100px' }}
             className="search-button"
             label="search"
+            buttonState={this.state.location.trim() === '' ? 'not-allowed' : 'ready'}
             onClick={this.onSearch}
           />
         </View>

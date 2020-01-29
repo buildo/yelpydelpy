@@ -1,9 +1,16 @@
 {
-  "locales": [
-    "it"
-  ],
+  "locales": ["it"],
   "messages": {
-    "Hello.hello": "Ciao {name}!",
-    "Hello.warningLength": "la lunghezza del nome deve essere compresa tra 6 e 50"
+    "SearchBar.search": "Cerca",
+    "RestaurantDetails.hours": "Orari",
+    "RestaurantDetails.noData": "Dati non disponibili",
+    "RestaurantDetails.mon": "Lun",
+    "RestaurantDetails.tue": "Mar",
+    "RestaurantDetails.wed": "Mer",
+    "RestaurantDetails.thu": "Gio",
+    "RestaurantDetails.fri": "Ven",
+    "RestaurantDetails.sat": "Sab",
+    "RestaurantDetails.sun": "Dom",
+    "RestaurantDetails.closed": "Chiuso"
   }
 }
